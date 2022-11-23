@@ -21,11 +21,11 @@ namespace nHibernateOperations.Controllers
         }
 
         // GET: Employees/Details
-        public ActionResult Details(int id = 0)
+        public ActionResult Details(int empId = 0)
         {
             using (ISession session = OpenNHibertnateSession.OpenSession())
             {
-                var employee = session.Get<Employee>(id);
+                var employee = session.Get<Employee>(empId);
                 return View(employee);
             }
         }
@@ -38,13 +38,13 @@ namespace nHibernateOperations.Controllers
 
         // POST: /Employees/Create
         [HttpPost]
-        public ActionResult Create(Employee emp)
+        public ActionResult Create(Employee employeeObj)
         {
             using (ISession session = OpenNHibertnateSession.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
-                    session.Save(emp);
+                    session.Save(employeeObj);
                     transaction.Commit();
                 }
             }
@@ -53,31 +53,31 @@ namespace nHibernateOperations.Controllers
         }
                 
         // GET: /Employees/Edit/5
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit(int empId = 0)
         {
             using (ISession session = OpenNHibertnateSession.OpenSession())
             {
-                var employee = session.Get<Employee>(id);
+                var employee = session.Get<Employee>(empId);
                 return View(employee);
             }
         }
 
         // POST: /Employees/Edit/5
         [HttpPost]
-        public ActionResult Edit(int? id, Employee emp)
+        public ActionResult Edit(int? empId, Employee employeeObj)
         {
             using (ISession session = OpenNHibertnateSession.OpenSession())
             {
-                var employee = session.Get<Employee>(id);
-                employee.Name = emp.Name;
-                employee.Designation = emp.Designation;
-                employee.Role = emp.Role;
-                employee.Gender = emp.Gender;
-                employee.Salary = emp.Salary;
-                employee.City = emp.City;
-                employee.State = emp.State;
-                employee.Zip = emp.Zip;
-                employee.Address = emp.Address;
+                var employee = session.Get<Employee>(empId);
+                employee.Name = employeeObj.Name;
+                employee.Designation = employeeObj.Designation;
+                employee.Role = employeeObj.Role;
+                employee.Gender = employeeObj.Gender;
+                employee.Salary = employeeObj.Salary;
+                employee.City = employeeObj.City;
+                employee.State = employeeObj.State;
+                employee.Zip = employeeObj.Zip;
+                employee.Address = employeeObj.Address;
 
                 using (ITransaction transaction = session.BeginTransaction())
                 {
@@ -89,24 +89,24 @@ namespace nHibernateOperations.Controllers
         }
 
         // GET: /Employees/Delete/5
-        public ActionResult Delete(int id = 0)
+        public ActionResult Delete(int empId = 0)
         {
             using (ISession session = OpenNHibertnateSession.OpenSession())
             {
-                var employee = session.Get<Employee>(id);
+                var employee = session.Get<Employee>(empId);
                 return View(employee);
             }
         }
 
         // POST: /Employees/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id, Employee emp)
+        public ActionResult DeleteConfirmed(int empId, Employee employeeObj)
         {
             using (ISession session = OpenNHibertnateSession.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
-                    session.Delete(emp);
+                    session.Delete(employeeObj);
                     transaction.Commit();
                 }
             }
